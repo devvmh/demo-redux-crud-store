@@ -1,0 +1,21 @@
+{
+  "name": "demo-redux-crud-store",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "json-server": "^0.10.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "redux-crud-store": "^5.2.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:server": "json-server --port 4000 db.json",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
