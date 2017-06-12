@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import createSagaMiddleware from 'redux-saga'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { crudSaga, ApiClient } from 'redux-crud-store'
