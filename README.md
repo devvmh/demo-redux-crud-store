@@ -1,4 +1,4 @@
-This is an application for testing and demonstrating the features of redux-crud-store.
+This is an application for testing and demonstrating the features of [redux-crud-store](https://github.com/devvmh/redux-crud-store).
 
 To run the serverside dummy API: `npm run start:server`
 
