@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
+import { crudReducer } from 'redux-crud-store'
 
 const rootReducer = combineReducers({
-  test: x => true
+  models: crudReducer
 })
 
 export default rootReducer
