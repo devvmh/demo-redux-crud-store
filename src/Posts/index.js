@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { mapStateToProps, mapDispatchToProps, connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 import { fetchPosts } from './actionCreators'
 import { select } from 'redux-crud-store'
@@ -35,7 +35,7 @@ class List extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return { posts: select(fetchPosts({ page: 1 }), state.models) }
+  return { posts: select(fetchPosts({}), state.models) }
 }
 
 export default connect(mapStateToProps)(List)
