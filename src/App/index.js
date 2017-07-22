@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { Link } from 'react-router-dom'
 import './App.css';
-import Posts from '../Posts'
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Posts />
+        <Link to="/posts">Go to list of posts</Link>
       </div>
     );
   }
