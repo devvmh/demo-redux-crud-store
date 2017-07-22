@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import { fetchPosts } from './actionCreators'
+import { Link } from 'react-router-dom'
 import { select } from 'redux-crud-store'
 
-class List extends Component {
+import { fetchPosts } from './actionCreators'
+
+class PostIndex extends Component {
   componentWillMount() {
     const { posts, dispatch } = this.props
     if (posts.needsFetch) {
@@ -28,7 +29,13 @@ class List extends Component {
       </div>
     } else {
       return <div>
-        {posts.data.map(post => <li key={post.id}>{post.title}</li>)}
+        {posts.data.map(post => (
+          <li key={post.id}>
+            <Link to={`/posts/${post.id}`}>
+              {post.title}
+            </Link>
+          </li>
+        ))}
       </div>
     }
   }
@@ -38,4 +45,4 @@ function mapStateToProps(state, ownProps) {
   return { posts: select(fetchPosts({}), state.models) }
 }
 
-export default connect(mapStateToProps)(List)
+export default connect(mapStateToProps)(PostIndex)
