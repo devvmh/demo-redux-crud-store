@@ -29,7 +29,6 @@ class Post extends Component {
       </div>
     } else {
       return <ul>
-        <li>Id: {post.data.id}</li>
         <li>Title: {post.data.title}</li>
         <li>Author: {post.data.author}</li>
         <li>Body: {post.data.body}</li>
@@ -38,9 +37,13 @@ class Post extends Component {
   }
 
   render() {
+    const { post } = this.props
     return <div>
       <p><Link to="/posts">Back to posts</Link></p>
       {this.renderPost()}
+      { post.data && (
+        <p><Link to={`/posts/${post.data.id}/edit`}>Edit</Link></p>
+      )}
     </div>
   }
 }
