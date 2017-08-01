@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { select, selectActionStatus } from 'redux-crud-store'
 
-import { fetchPost, updatePost } from './actionCreators'
+import { fetchPost, updatePost, deletePost } from './actionCreators'
 
 class EditPost extends Component {
   componentWillMount() {
@@ -12,8 +12,10 @@ class EditPost extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.init(nextProps.post, nextProps.dispatch)
-    if (nextProps.status.response) {
+    if (nextProps.updateStatus.response) {
       nextProps.history.push(`/posts/${nextProps.post.data.id}`)
+    } else if (nextProps.deleteStatus.response) {
+      nextProps.history.push("/posts")
     }
   }
 
@@ -25,6 +27,10 @@ class EditPost extends Component {
 
   update = field => e => {
     this.setState({ [field]: e.target.value })
+  }
+
+  delete = e => {
+    this.props.dispatch(deletePost(this.props.post.data.id))
   }
 
   submit = e => {
@@ -60,8 +66,11 @@ class EditPost extends Component {
     return <div>
       <p><Link to="/posts">Back to posts</Link></p>
       {this.renderPost()}
-      { post.data && (
+      {post.data && (
         <p><Link to={`/posts/${post.data.id}`}>Stop editing</Link></p>
+      )}
+      {post.data && (
+        <p><button onClick={this.delete}>Delete post</button></p>
       )}
     </div>
   }
@@ -71,7 +80,8 @@ function mapStateToProps(state, ownProps) {
   const { id } = ownProps.match.params
   return {
     post: select(fetchPost(id), state.models),
-    status: selectActionStatus('posts', state.models, 'update')
+    updateStatus: selectActionStatus('posts', state.models, 'update'),
+    deleteStatus: selectActionStatus('posts', state.models, 'delete')
   }
 }
 
