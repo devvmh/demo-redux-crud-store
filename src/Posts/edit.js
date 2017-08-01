@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { select } from 'redux-crud-store'
+import { select, selectActionStatus } from 'redux-crud-store'
 
 import { fetchPost, updatePost } from './actionCreators'
 
@@ -11,7 +11,10 @@ class PostEdit extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.init(nextProps.post, this.props.dispatch)
+    this.init(nextProps.post, nextProps.dispatch)
+    if (nextProps.status.response) {
+      nextProps.history.push(`/posts/${nextProps.post.data.id}`)
+    }
   }
 
   init = (post, dispatch) => {
@@ -31,7 +34,6 @@ class PostEdit extends Component {
       const newPost = Object.assign(post.data, this.state)
       this.props.dispatch(updatePost(post.data.id, newPost))
     }
-    this.props.history.push(`/posts/${post.data.id}`)
   }
 
   renderPost = () => {
@@ -67,7 +69,10 @@ class PostEdit extends Component {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps.match.params
-  return { post: select(fetchPost(id), state.models) }
+  return {
+    post: select(fetchPost(id), state.models),
+    status: selectActionStatus('posts', state.models, 'update')
+  }
 }
 
 export default connect(mapStateToProps)(PostEdit)
