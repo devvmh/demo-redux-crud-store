@@ -5,7 +5,7 @@ import { select, selectActionStatus } from 'redux-crud-store'
 
 import { fetchPost, updatePost } from './actionCreators'
 
-class PostEdit extends Component {
+class EditPost extends Component {
   componentWillMount() {
     this.init(this.props.post, this.props.dispatch)
   }
@@ -75,4 +75,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(PostEdit)
+export default connect(mapStateToProps)(EditPost)

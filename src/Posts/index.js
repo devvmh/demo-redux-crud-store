@@ -29,13 +29,16 @@ class PostIndex extends Component {
       </div>
     } else {
       return <div>
-        {posts.data.map(post => (
-          <li key={post.id}>
-            <Link to={`/posts/${post.id}`}>
-              {post.title}
-            </Link>
-          </li>
-        ))}
+        <ul>
+          {posts.data.map(post => (
+            <li key={post.id}>
+              <Link to={`/posts/${post.id}`}>
+                {post.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link to="/posts/new">New post</Link>
       </div>
     }
   }
